@@ -6,7 +6,7 @@
   "author": "Takeda Takumi <takeda.takumi.2011@gmail.com>",
   "license": "MIT",
   "scripts": {
-  "test": "jest --verbose",
+  "test": "jest --verbose --coverage",
   "prettier": "prettier --write --ignore-path .gitignore \"**/*.(js|ts)\"",
   "lint": "eslint --ext \".ts,.js\" --ignore-path .gitignore .",
   "lint:fix": "eslint --fix --ext \".js,.ts\" --ignore-path .gitignore .",
