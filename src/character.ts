@@ -21,14 +21,14 @@ export const character: CharFunc = (c) => {
 };
 
 // 条件を満たす1文字のパーサ
-type IsFunc = <T extends string>(func: (c: ParserInput[0]) => c is T) => Parser<string>;
+type IsFunc = <T extends string>(func: (c: ParserInput[0]) => c is T) => Parser<T>;
 export const is: IsFunc = (func) => {
 	return (input) => {
 		const r = anyChar(input);
 		if (r.result === 'fail') {
 			return r;
 		}
-		if (func(r.data) === false) {
+		if (!func(r.data)) {
 			return { result: 'fail' };
 		}
 		return {
