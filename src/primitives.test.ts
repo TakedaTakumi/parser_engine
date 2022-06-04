@@ -21,12 +21,12 @@ describe('anyChar', () => {
 		});
 	});
 	test('Many characters input', () => {
-		const input = [...'hoge'];
+		const input = [...'huge'];
 		const output = parser(input);
 		expect(output).toEqual<ParserOutput<string>>({
 			result: 'success',
 			data: 'h',
-			rest: [...'oge'],
+			rest: [...'uge'],
 		});
 	});
 });

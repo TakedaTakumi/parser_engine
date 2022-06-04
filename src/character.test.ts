@@ -27,8 +27,8 @@ describe('character("a")', () => {
 			result: 'fail',
 		});
 	});
-	test('input "hoge"', () => {
-		const input = [...'hoge'];
+	test('input "huge"', () => {
+		const input = [...'huge'];
 		const output = parser(input);
 		expect(output).toEqual<ParserOutput<'a'>>({
 			result: 'fail',

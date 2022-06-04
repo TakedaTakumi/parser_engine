@@ -30,13 +30,13 @@ describe('not(char("a"))', () => {
 			rest: [...'A'],
 		});
 	});
-	test('input "hoge"', () => {
-		const input = [...'hoge'];
+	test('input "huge"', () => {
+		const input = [...'huge'];
 		const output = parser(input);
 		expect(output).toEqual<ParserOutput<null>>({
 			result: 'success',
 			data: null,
-			rest: [...'hoge'],
+			rest: [...'huge'],
 		});
 	});
 	test('input "apply"', () => {
