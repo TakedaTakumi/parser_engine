@@ -19,7 +19,7 @@ describe('string', () => {
 		});
 	});
 	test('input "\'hello\'"', () => {
-		const input = [..."'hello'"];
+		const input = [...'\'hello\''];
 		const output = parser(input);
 		expect(output).toEqual<ParserOutput<string>>({
 			result: 'fail',

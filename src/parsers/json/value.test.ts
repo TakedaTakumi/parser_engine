@@ -1,4 +1,4 @@
-import { value } from './value';
+import { value, array } from './value';
 import type { ValueType } from './value';
 import type { ParserOutput } from 'types';
 
@@ -84,4 +84,50 @@ describe('value', () => {
 	});
 
 	test.todo('Test object');
+});
+
+describe('array', () => {
+	const parser = array;
+
+	test('Empty input', () => {
+		const input = [] as const;
+		const output = parser(input);
+		expect(output).toEqual<ParserOutput<ValueType[]>>({
+			result: 'fail',
+		});
+	});
+	test('input "hello"', () => {
+		const input = [...'hello'];
+		const output = parser(input);
+		expect(output).toEqual<ParserOutput<ValueType[]>>({
+			result: 'fail',
+		});
+	});
+	test('input "[]"', () => {
+		const input = [...'[]'];
+		const output = parser(input);
+		expect(output).toEqual<ParserOutput<ValueType[]>>({
+			result: 'success',
+			data: [],
+			rest: [],
+		});
+	});
+	test('input "[1]"', () => {
+		const input = [...'[1]'];
+		const output = parser(input);
+		expect(output).toEqual<ParserOutput<ValueType[]>>({
+			result: 'success',
+			data: [1],
+			rest: [],
+		});
+	});
+	test('input "[1, "2", false, null]"', () => {
+		const input = [...'[1, "2", false, null]'];
+		const output = parser(input);
+		expect(output).toEqual<ParserOutput<ValueType[]>>({
+			result: 'success',
+			data: [1, '2', false, null],
+			rest: [],
+		});
+	});
 });
