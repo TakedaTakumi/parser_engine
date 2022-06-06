@@ -1,5 +1,5 @@
-import { value, array } from './value';
-import type { ValueType } from './value';
+import { value, array, object } from './value';
+import type { ValueType, ObjectType } from './value';
 import type { ParserOutput } from 'types';
 
 describe('value', () => {
@@ -82,8 +82,15 @@ describe('value', () => {
 			rest: [],
 		});
 	});
-
-	test.todo('Test object');
+	test('input "{ "answer": 42, "absolute-zero": -273.15 }"', () => {
+		const input = [...'{ "answer": 42, "absolute-zero": -273.15 }'];
+		const output = parser(input);
+		expect(output).toEqual<ParserOutput<ValueType>>({
+			result: 'success',
+			data: { answer: 42, 'absolute-zero': -273.15 },
+			rest: [],
+		});
+	});
 });
 
 describe('array', () => {
@@ -127,6 +134,52 @@ describe('array', () => {
 		expect(output).toEqual<ParserOutput<ValueType[]>>({
 			result: 'success',
 			data: [1, '2', false, null],
+			rest: [],
+		});
+	});
+});
+
+describe('object', () => {
+	const parser = object;
+
+	test('Empty input', () => {
+		const input = [] as const;
+		const output = parser(input);
+		expect(output).toEqual<ParserOutput<ObjectType>>({
+			result: 'fail',
+		});
+	});
+	test('input "hello"', () => {
+		const input = [...'hello'];
+		const output = parser(input);
+		expect(output).toEqual<ParserOutput<ObjectType>>({
+			result: 'fail',
+		});
+	});
+	test('input "{}"', () => {
+		const input = [...'{}'];
+		const output = parser(input);
+		expect(output).toEqual<ParserOutput<ObjectType>>({
+			result: 'success',
+			data: {},
+			rest: [],
+		});
+	});
+	test('input "{ "answer-to-the-ultimate-question": 42 }"', () => {
+		const input = [...'{ "answer-to-the-ultimate-question": 42 }'];
+		const output = parser(input);
+		expect(output).toEqual<ParserOutput<ObjectType>>({
+			result: 'success',
+			data: { 'answer-to-the-ultimate-question': 42 },
+			rest: [],
+		});
+	});
+	test('input "{ "number": 1, "string": "hello", "boolean": true, "null": null }"', () => {
+		const input = [...'{ "number": 1, "string": "hello", "boolean": true, "null": null }'];
+		const output = parser(input);
+		expect(output).toEqual<ParserOutput<ObjectType>>({
+			result: 'success',
+			data: { number: 1, string: 'hello', boolean: true, null: null },
 			rest: [],
 		});
 	});
