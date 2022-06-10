@@ -7,9 +7,9 @@
   "license": "MIT",
   "scripts": {
   "test": "jest --verbose --coverage",
-  "prettier": "prettier --write --ignore-path .gitignore \"**/*.(js|ts)\"",
-  "lint": "eslint --ext \".ts,.js\" --ignore-path .gitignore .",
-  "lint:fix": "eslint --fix --ext \".js,.ts\" --ignore-path .gitignore .",
+  "prettier": "prettier --write \"**/*.(js|ts)\"",
+  "lint": "eslint --ext \".ts,.js\" .",
+  "lint:fix": "eslint --fix --ext \".js,.ts\" .",
   "format": "yarn prettier && yarn lint --fix"
   },
   "devDependencies": {

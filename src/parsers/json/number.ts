@@ -12,7 +12,7 @@ const exponent: Parser<string> = map(concatenate([or([character('E'), character(
 );
 
 export const number: Parser<number> = map(concatenate([option(sign), integer, option(fraction), option(exponent)]), ([sign, integer, fraction, exponent]) => {
-	const optOrEmpty = (opt: Option<string>) => (opt.status === 'some' ? opt.value : '');
+	const optOrEmpty = (opt: Option<string>): string => (opt.status === 'some' ? opt.value : '');
 	const numberString = [optOrEmpty(sign), integer, optOrEmpty(fraction), optOrEmpty(exponent)].join('');
 	return Number.parseFloat(numberString);
 });
